@@ -1,7 +1,11 @@
-import Image from "next/image";
+import { auth } from "@clerk/nextjs";
 import Link from "next/link";
 
-export default function Home() {
+export default async function Home() {
+  const { userId } = await auth();
+
+  let href = userId ? "/journal" : "/new-user";
+
   return (
     <div className=" h-screen w-screen bg-black flex justify-center items-center text-white">
       <div className=" max-w-lg w-full mx-auto">
@@ -11,7 +15,7 @@ export default function Home() {
           you need is to be honest.
         </p>
         <div>
-          <Link href={"/journal"}>
+          <Link href={href}>
             <button className="bg-green-600 rounded-md p-2 hover:bg-green-800">
               Get started
             </button>
