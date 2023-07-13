@@ -30,11 +30,11 @@ model JournalEntry {
   userId String
   user   User   @relation(fields: [userId], references: [id])
 
-  // db.text prevents the content to take only the width of tables width (it will take fill width)
+  // db.text prevents the content to take only the width of tables width (it will take full width)
   content  String    @db.Text
   analysis Analysis?
 
-  @@index([userId])
+  @@unique([userId, id])
 }
 
 model Analysis {
